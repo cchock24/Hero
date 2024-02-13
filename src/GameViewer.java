@@ -20,12 +20,9 @@ public class GameViewer extends JFrame {
     }
 
     public void paint(Graphics gr){
-        gr.drawImage(board, 0,37, 600,750, this);
-        this.setHealthop(gr, g.getP1());
-        this.setHealthyou(gr, g.getP2());
-        this.setEnergyop(gr, g.getP1());
-        this.setEnergyyou(gr, g.getP2());
+        this.Reset(gr);
         g.getP1().printHand(gr);
+        this.printLane(g.getLane(), gr);
     }
 
     //Set opposite side health
@@ -49,4 +46,28 @@ public class GameViewer extends JFrame {
         g.setFont(new Font("Serif", Font.PLAIN, 30));
         g.drawString(Integer.toString(p.getEnergy()), 50, 560);
     }
+    public void Reset(Graphics gr){
+        gr.drawImage(board, 0,37, 600,750, this);
+        this.setHealthop(gr, g.getP1());
+        this.setHealthyou(gr, g.getP2());
+        this.setEnergyop(gr, g.getP1());
+        this.setEnergyyou(gr, g.getP2());
+    }
+
+    public void printLane(Card[][] l, Graphics g){
+        for(int i = 0; i < 2; i++){
+            for(int j = 0; j < 5; j++){
+                if(l[j][i] != null && i == 0){
+                    l[j][i].printCard(g, 30 + (j*100), 500);
+                }
+                if(l[j][i] != null && i == 1){
+                    l[j][i].printCard(g, 30 + (j*100), 300);
+                }
+            }
+        }
+    }
+    public void printWin(){
+
+    }
+
 }

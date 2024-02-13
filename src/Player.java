@@ -12,16 +12,14 @@ public class Player {
     Image icon;
     private ArrayList<Card> hand;
     private ArrayList<Card> deck;
-    private String name;
     private ArrayList<Card> discard;
 
-    public Player(String n){
+    public Player(){
         health = 20;
         energy = 0;
         block = 0;
         hand = new ArrayList<Card>();
         deck = new ArrayList<Card>();
-        name = n;
         icon = new ImageIcon().getImage();
         discard = new ArrayList<Card>();
     }
@@ -42,8 +40,12 @@ public class Player {
         return energy;
     }
 
-    public void setEnergy(int energy) {
-        this.energy = energy;
+    public void addEnergy(int energy) {
+        this.energy += energy;
+    }
+
+    public void subEnergy(int energy){
+        this.energy -= energy;
     }
 
     public int getBlock() {
@@ -55,18 +57,48 @@ public class Player {
     }
 
     public void printHand(Graphics g){
-        for(int i = 0; i <hand.size(); i++){
+        for(int i = 0; i < hand.size(); i++){
             if(i <= 4){
-                hand.get(i).printCard(g,700, 10 + (i * Card.CARD_WIDTH));
+                hand.get(i).printCard(g,20 + (i * Card.CARD_WIDTH) + i*15, 630);
+                g.setFont(new Font("Serif", Font.PLAIN, 15));
+                g.drawString(Integer.toString(i), 20 + (i * Card.CARD_WIDTH) + i*15 +45, 695);
             }
+
             else{
-                hand.get(i).printCard(g,800, 10 + (i * Card.CARD_WIDTH));
+                hand.get(i).printCard(g,20 + ((i - 5) * Card.CARD_WIDTH) + (i-5)*15, 700);
+                g.setFont(new Font("Serif", Font.PLAIN, 15));
+                g.drawString(Integer.toString(i), 20 + ((i-5) * Card.CARD_WIDTH) + (i-5)*15+45, 765);
             }
 
         }
     }
+    //Take random card from deck put it in hand if less than 10 cards
+    public void addHand(){
+        int random = (int)(Math.random()*40);
+        if(hand.size() <= 10){
+            hand.add(deck.remove(random));
+        }
+    }
 
-    public void addHand(Card c){
-        hand.add(c);
+    public Card addLane(int index){
+        hand.get(index).setLane(index);
+        return hand.remove(index);
+    }
+
+    public void randomDeck(){
+        for(int i = 0; i < 40; i++){
+            deck.add(new Card(2,2,2));
+        }
+    }
+
+    public ArrayList<Card> getHand() {
+        return hand;
+    }
+    public boolean takeDamage(int damage){
+        this.health -= damage;
+        if(health <= 0){
+            return true;
+        }
+        return false;
     }
 }
