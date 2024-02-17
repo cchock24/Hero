@@ -35,7 +35,9 @@ public class Game {
             p2.randomDeck();
             Turn();
             this.p1takeTurn();
+            window.repaint();
             this.p2takeTurn();
+            window.repaint();
             this.Attack();
         }
 
@@ -43,38 +45,50 @@ public class Game {
 
     // Has P1 choose to play cards
     public void p1takeTurn(){
-        System.out.println("Do You want to Play a Card (Insert index) If no Insert -1");
+        System.out.println("P1 Do You want to Play a Card (Insert index) If no Insert -1");
         int move = s.nextInt();
         s.nextLine();
-        System.out.println("What Row (0-4)");
-        int spot = s.nextInt();
-        s.nextLine();
-        if(move != -1 && move <= 9){
+        while(move != -1){
+            System.out.println("What Row (0-4)");
+            int spot = s.nextInt();
+            s.nextLine();
+            //Talk Mr.Blick how to check if null w/o going into it
+            if(move >= 0 && move <= 9 && p1.getHand().get(move) != null){
                 if(this.energyCost(p1.getHand().get(move), p1) && laneEmpty(spot, 0)){
-                this.addLane(p1, spot, move);
+                    this.addLane(p1, spot, move);
+                    window.repaint();
                 }
                 else{
                     this.p1takeTurn();
                 }
+            }
+            System.out.println("P1 Do You want to Play a Card (Insert index) If no Insert -1");
+            move = s.nextInt();
+            s.nextLine();
         }
-
     }
 
     // Has P2 choose to play cards
     public void p2takeTurn(){
-        System.out.println("Do You want to Play a Card (Insert index) If no Insert -1");
+        System.out.println("P2 Do You want to Play a Card (Insert index) If no Insert -1");
         int move = s.nextInt();
         s.nextLine();
-        System.out.println("What Row (0-4)");
-        int spot = s.nextInt();
-        s.nextLine();
-        if (move != -1 && move <= 9) {
-            if(this.energyCost(p2.getHand().get(move), p2) && this.laneEmpty(spot, 1)) {
-                this.addLane(p1, spot, move);
+        while(move != -1){
+            System.out.println("What Row (0-4)");
+            int spot = s.nextInt();
+            s.nextLine();
+            if (move >= 0 && move <= 9 && p2.getHand().get(move) != null) {
+                if(this.energyCost(p2.getHand().get(move), p2) && this.laneEmpty(spot, 1)) {
+                    this.addLane(p2, spot, move);
+                    window.repaint();
                 }
-            else{
-                this.p2takeTurn();
+                else{
+                    this.p2takeTurn();
+                }
             }
+            System.out.println("P2 Do You want to Play a Card (Insert index) If no Insert -1");
+            move = s.nextInt();
+            s.nextLine();
         }
     }
 
@@ -116,8 +130,8 @@ public class Game {
 
     public void Turn(){
         turn++;
-        p1.addEnergy(1);
-        p2.addEnergy(1);
+        p1.addEnergy(turn);
+        p2.addEnergy(turn);
         p1.addHand();
         p2.addHand();
     }
@@ -137,13 +151,17 @@ public class Game {
     }
 
     public void Attack(){
-            for(int j = 0; j < 5; j++){
+        boolean dead1 = false;
+        boolean dead2 = false;
+        int num1=0;
+        int num2=0;
+        for(int j = 0; j < 5; j++){
                 if(lane[j][0] != null){
                     int damage = lane[j][0].getDamage();
                     if(lane[j][1] != null){
-                        boolean dead = lane[j][1].takeDamage(damage);
-                        if(dead){
-                            lane[j][1] = null;
+                        dead1 = lane[j][1].takeDamage(damage);
+                        if(dead1){
+                            num1 = j;
                         }
                     }
                     else{
@@ -156,9 +174,9 @@ public class Game {
                 if(lane[j][1] != null){
                     int damage = lane[j][1].getDamage();
                     if(lane[j][0] != null){
-                        boolean dead = lane[j][0].takeDamage(damage);
-                        if(dead){
-                            lane[j][0] = null;
+                        dead2 = lane[j][0].takeDamage(damage);
+                        if(dead2){
+                            num2 = j;
                         }
                     }
                     else{
@@ -168,15 +186,23 @@ public class Game {
                         }
                     }
                 }
+                if(dead1){
+                    lane[num1][1] = null;
+                }
+                if(dead2){
+                    lane[num2][0] = null;
+                }
             }
     }
 
     public void p2Win(){
         System.out.println("Player 2 Wins");
-        window.printWin();
+        window.checkWin(2);
+        window.repaint();
     }
     public void p1Win(){
         System.out.println("Player 1 Wins");
-        window.printWin();
+        window.checkWin(1);
+        window.repaint();
     }
 }

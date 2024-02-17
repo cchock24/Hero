@@ -65,15 +65,17 @@ public class Card {
 
     public void printCard(Graphics g, int x, int y){
         g.drawRect(x, y, CARD_WIDTH,CARD_HEIGHT);
-        g.setFont(new Font("Serif", Font.PLAIN, 20));
-        g.drawString("H: " + this.health, x+10, y + 17);
-        g.drawString("E: " + this.energy, x+10, y + 37);
+        g.setFont(new Font("Serif", Font.PLAIN, 15));
+        g.drawString("H: " + this.health, x+10, y + 15);
+        g.drawString("E: " + this.energy, x+10, y + 30);
+        g.drawString("D: " + this.damage, x+10, y + 45);
     }
     // Draw Icon for lane (default square for now)
     public void drawLane(int x, int y, Graphics g){
-        g.drawRect(x, y, 10,10);
+        g.drawRect(x, y, 30,30);
         g.setFont(new Font("Serif", Font.PLAIN, 10));
-        g.drawString("H: " + this.health, x, y);
+        g.drawString("H: " + this.health, x+10, y+10);
+        g.drawString("D: " + this.damage, x+10, y +20);
     }
 }
 
