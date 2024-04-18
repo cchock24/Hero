@@ -29,11 +29,13 @@ public class Game {
     }
 
     public void run(){
+        window.repaint();
+        p1.randomDeck();
+        p2.randomDeck();
         while(!win){
             window.repaint();
-            p1.randomDeck();
-            p2.randomDeck();
             Turn();
+
             this.p1takeTurn();
             window.repaint();
             this.p2takeTurn();
@@ -130,10 +132,11 @@ public class Game {
 
     public void Turn(){
         turn++;
-        p1.addEnergy(turn);
-        p2.addEnergy(turn);
+        p1.setEnergy(turn);
+        p2.setEnergy(turn);
         p1.addHand();
         p2.addHand();
+        this.checkDecay();
     }
 
     public void addLane(Player p, int l, int index){
@@ -158,6 +161,11 @@ public class Game {
         for(int j = 0; j < 5; j++){
                 if(lane[j][0] != null){
                     int damage = lane[j][0].getDamage();
+                    //No Damage is Frozen
+                    if(lane[j][0].isFrozen()){
+                        damage = 0;
+                        lane[j][0].setFrozen(false);
+                    }
                     if(lane[j][1] != null){
                         dead1 = lane[j][1].takeDamage(damage);
                         if(dead1){
@@ -173,6 +181,11 @@ public class Game {
                 }
                 if(lane[j][1] != null){
                     int damage = lane[j][1].getDamage();
+                    //No Damage is Frozen
+                    if(lane[j][1].isFrozen()){
+                        damage = 0;
+                        lane[j][1].setFrozen(false);
+                    }
                     if(lane[j][0] != null){
                         dead2 = lane[j][0].takeDamage(damage);
                         if(dead2){
@@ -204,5 +217,16 @@ public class Game {
         System.out.println("Player 1 Wins");
         window.checkWin(1);
         window.repaint();
+    }
+    // Checks and implements based on cards special abilites
+    //Applies Decay Damage;
+    public void checkDecay(){
+        for(int i = 0; i < lane.length; i++){
+            for(int j = 0; j <lane[0].length; j++){
+                if(lane[i][j].isDecay()){
+                    lane[i][j].takeDamage(1);
+                }
+            }
+        }
     }
 }

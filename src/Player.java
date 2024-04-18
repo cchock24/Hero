@@ -41,6 +41,9 @@ public class Player {
     }
 
     public void addEnergy(int energy) {
+        this.energy += energy;
+    }
+    public void setEnergy(int energy){
         this.energy = energy;
     }
 
@@ -74,7 +77,7 @@ public class Player {
     }
     //Take random card from deck put it in hand if less than 10 cards
     public void addHand(){
-        int random = (int)(Math.random()*40);
+        int random = (int)(Math.random()*deck.size());
         if(hand.size() <= 10){
             hand.add(deck.remove(random));
         }

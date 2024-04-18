@@ -8,15 +8,31 @@ public class Card {
     private int health;
     private int damage;
     private int energy;
+    private boolean frozen;
+    private boolean deadly;
+    private boolean decay;
+    private boolean charge;
+    private boolean hasArmor;
+    private boolean st; //Strikethrough
     Image icon;
     private int lane;
     private int playerNum;
+    private int origDamage; //To reset after Frozen
 
     public Card(int h, int d, int e){
         health = h;
         damage = d;
         energy = e;
         icon = new ImageIcon().getImage();
+        origDamage = this.damage;
+    }
+
+    public int getOrigDamage() {
+        return origDamage;
+    }
+
+    public boolean isHasArmor() {
+        return hasArmor;
     }
 
     public void Damage(int d){
@@ -47,6 +63,46 @@ public class Card {
         this.energy = energy;
     }
 
+    public boolean isFrozen() {
+        return frozen;
+    }
+
+    public void setFrozen(boolean frozen) {
+        this.frozen = frozen;
+    }
+
+    public boolean isDeadly() {
+        return deadly;
+    }
+
+    public void setDeadly(boolean deadly) {
+        this.deadly = deadly;
+    }
+
+    public boolean isDecay() {
+        return decay;
+    }
+
+    public void setDecay(boolean decay) {
+        this.decay = decay;
+    }
+
+    public boolean isCharge() {
+        return charge;
+    }
+
+    public void setCharge(boolean charge) {
+        this.charge = charge;
+    }
+
+    public boolean isSt() {
+        return st;
+    }
+
+    public void setSt(boolean st) {
+        this.st = st;
+    }
+
     public int getLane() {
         return lane;
     }
@@ -56,7 +112,13 @@ public class Card {
     }
 
     public boolean takeDamage(int attack){
-        health -= attack;
+        //Armor makes it so attacks to one less damage
+        if(this.isHasArmor()){
+            health -= attack -1;
+        }
+        else{
+            health -= attack;
+        }
         if(health <= 0){
             return true;
         }
@@ -77,5 +139,6 @@ public class Card {
         g.drawString("H: " + this.health, x+10, y+10);
         g.drawString("D: " + this.damage, x+10, y +20);
     }
+
 }
 
