@@ -61,18 +61,8 @@ public class Player {
 
     public void printHand(Graphics g){
         for(int i = 0; i < hand.size(); i++){
-            if(i <= 4){
-                hand.get(i).printCard(g,20 + (i * Card.CARD_WIDTH) + i*15, 630);
-                g.setFont(new Font("Serif", Font.PLAIN, 15));
-                g.drawString(Integer.toString(i), 20 + (i * Card.CARD_WIDTH) + i*15 +45, 695);
-            }
-
-            else{
-                hand.get(i).printCard(g,20 + ((i - 5) * Card.CARD_WIDTH) + (i-5)*15, 700);
-                g.setFont(new Font("Serif", Font.PLAIN, 15));
-                g.drawString(Integer.toString(i), 20 + ((i-5) * Card.CARD_WIDTH) + (i-5)*15+45, 765);
-            }
-
+            g.setFont(new Font("Serif", Font.PLAIN, 15));
+            hand.get(i).printCard(g);
         }
     }
     //Take random card from deck put it in hand if less than 10 cards
@@ -81,6 +71,20 @@ public class Player {
         if(hand.size() <= 10){
             hand.add(deck.remove(random));
         }
+        for(int i = 0; i < hand.size(); i++){
+            if(i <= 4){
+                hand.get(i).setX(20 + (i * Card.CARD_WIDTH) + i*15);
+                hand.get(i).setY(630);
+            }
+            else{
+                hand.get(i).setX(20 + ((i - 5) * Card.CARD_WIDTH) + (i-5)*15);
+                hand.get(i).setY(700);
+            }
+
+        }
+    }
+    public void addHand(Card c){
+        hand.add(c);
     }
 
     public Card addLane(int index){

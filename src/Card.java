@@ -2,22 +2,25 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Card {
-
+    public boolean canStrike;
     public static final int CARD_WIDTH = 100;
     public static final int CARD_HEIGHT = 50;
+    private String name;
     private int health;
     private int damage;
     private int energy;
     private boolean frozen;
-    private boolean deadly;
     private boolean decay;
     private boolean charge;
+    private boolean canFreeze;
     private boolean hasArmor;
     private boolean st; //Strikethrough
     Image icon;
     private int lane;
     private int playerNum;
     private int origDamage; //To reset after Frozen
+    private int x;
+    private int y;
 
     public Card(int h, int d, int e){
         health = h;
@@ -25,6 +28,7 @@ public class Card {
         energy = e;
         icon = new ImageIcon().getImage();
         origDamage = this.damage;
+        frozen = false;
     }
 
     public int getOrigDamage() {
@@ -33,6 +37,10 @@ public class Card {
 
     public boolean isHasArmor() {
         return hasArmor;
+    }
+
+    public boolean isCanFreeze() {
+        return canFreeze;
     }
 
     public void Damage(int d){
@@ -63,20 +71,16 @@ public class Card {
         this.energy = energy;
     }
 
+    public boolean isCanStrike() {
+        return canStrike;
+    }
+
     public boolean isFrozen() {
         return frozen;
     }
 
     public void setFrozen(boolean frozen) {
         this.frozen = frozen;
-    }
-
-    public boolean isDeadly() {
-        return deadly;
-    }
-
-    public void setDeadly(boolean deadly) {
-        this.deadly = deadly;
     }
 
     public boolean isDecay() {
@@ -107,6 +111,7 @@ public class Card {
         return lane;
     }
 
+
     public void setLane(int lane) {
         this.lane = lane;
     }
@@ -124,8 +129,8 @@ public class Card {
         }
         return false;
     }
-
-    public void printCard(Graphics g, int x, int y){
+    public void printCard(Graphics g){
+        //Replace with Image Icon
         g.drawRect(x, y, CARD_WIDTH,CARD_HEIGHT);
         g.setFont(new Font("Serif", Font.PLAIN, 15));
         g.drawString("H: " + this.health, x+10, y + 15);
@@ -134,11 +139,61 @@ public class Card {
     }
     // Draw Icon for lane (default square for now)
     public void drawLane(int x, int y, Graphics g){
+        this.x = x;
+        this.y = y;
+        //Replace with Image Icon
+        g.drawRect(x, y, 30,30);
+        g.setFont(new Font("Serif", Font.PLAIN, 10));
+        g.drawString("H: " + this.health, x+10, y+10);
+        g.drawString("D: " + this.damage, x+10, y +20);
+    }
+    public void drawLane(Graphics g){
         g.drawRect(x, y, 30,30);
         g.setFont(new Font("Serif", Font.PLAIN, 10));
         g.drawString("H: " + this.health, x+10, y+10);
         g.drawString("D: " + this.damage, x+10, y +20);
     }
 
+    // Modified from Mr. Blick CS2FinalProjectResources
+    public boolean isClicked(int x, int y) {
+        if(x >= this.x && x <= this.x+CARD_WIDTH && y >= this.y && y <= this.y+CARD_HEIGHT){
+            return true;
+        }
+        return false;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+    public void printStats(Graphics g){
+        if(decay){
+            g.drawString("Decay",x,y);
+        }
+        if(hasArmor){
+            g.drawString("Armor",x,y);
+        }
+        if(canStrike){
+            g.drawString("Strikethrough",x,y);
+        }
+        if(canFreeze){
+            g.drawString("Freeze",x,y);
+        }
+        if(charge){
+            g.drawString("Charger",x,y);
+        }
+
+    }
 }
 
