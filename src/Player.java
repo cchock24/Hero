@@ -108,4 +108,8 @@ public class Player {
         }
         return false;
     }
+
+    public void setIcon(Image icon) {
+        this.icon = icon;
+    }
 }

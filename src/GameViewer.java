@@ -25,34 +25,45 @@ public class GameViewer extends JFrame {
 
     public void paint(Graphics gr) {
         phase = g.getPhase();
-        this.Reset(gr);
-        gr.setColor(Color.black);
-        if(g.notEnergy()){
-            this.noEnergy(gr);
+        if(phase == 4){
+            startGame(gr, g.getP1());
+            g.getTurn().draw(gr);
         }
-        if (phase == 0) {
-            g.getP1().printHand(gr);
-            if(g.getshowdict()){
-                this.printDict(gr,g.getP1());
+        if(phase == 5){
+            startGame(gr, g.getP2());
+            g.getTurn().draw(gr);
+        }
+        if(phase != 5 && phase != 4){
+            this.Reset(gr);
+            gr.setColor(Color.black);
+            if(g.notEnergy()){
+                this.noEnergy(gr);
+            }
+            if (phase == 0) {
+                g.getP1().printHand(gr);
+                if(g.getshowdict()){
+                    this.printDict(gr,g.getP1());
+                }
+            }
+            if (phase == 1) {
+                g.getP2().printHand(gr);
+                if(g.getshowdict()){
+                    this.printDict(gr,g.getP2());
+                }
+            }
+            if (phase == 3) {
+
+            }
+            this.printLane(g.getLane(), gr);
+
+            if (win1) {
+                this.printWin1(gr);
+            }
+            if (win2) {
+                this.printWIN2(gr);
             }
         }
-        if (phase == 1) {
-            g.getP2().printHand(gr);
-            if(g.getshowdict()){
-                this.printDict(gr,g.getP2());
-            }
-        }
-        if (phase == 3) {
 
-        }
-        this.printLane(g.getLane(), gr);
-
-        if (win1) {
-            this.printWin1(gr);
-        }
-        if (win2) {
-            this.printWIN2(gr);
-        }
     }
 
     //Set opposite side health
@@ -153,5 +164,53 @@ public class GameViewer extends JFrame {
     }
     public void noEnergy(Graphics g){
         g.drawString("Not Enough Energy", 200,500);
+    }
+
+    public void startGame(Graphics gr, Player p){
+        gr.setColor(Color.white);
+        gr.fillRect(0, 0, 600, 800);
+        gr.setColor(Color.black);
+        if(p == g.getP1()){
+            gr.drawString("P1 pick Character", 160, 100);
+        }
+        else{
+            gr.drawString("P2 pick Character", 160, 100);
+        }
+        Image icon = new ImageIcon("Resources/acetrainerf-gen6.png").getImage();
+        PlayerIcon atrainer1 = new PlayerIcon(icon, 10, 20);
+        atrainer1.drawYourself(gr, this);
+        icon = new ImageIcon("Resources/acetrainerf-gen6xy.png").getImage();
+        PlayerIcon atrainer2 = new PlayerIcon(icon, 10, 210);
+        atrainer2.drawYourself(gr,this);
+        icon = new ImageIcon("Resources/allister.png").getImage();
+        PlayerIcon allister = new PlayerIcon(icon, 10, 410);
+        allister.drawYourself(gr,this);
+        icon = new ImageIcon("Resources/anabel-gen7.png").getImage();
+        PlayerIcon anabel = new PlayerIcon(icon, 210, 20);
+        anabel.drawYourself(gr,this);
+        icon = new ImageIcon("Resources/aromalady.png").getImage();
+        PlayerIcon aroma = new PlayerIcon(icon, 210, 210);
+        aroma.drawYourself(gr,this);
+        icon = new ImageIcon("Resources/artist-gen4.png").getImage();
+        PlayerIcon artist = new PlayerIcon(icon, 210, 410);
+        artist.drawYourself(gr,this);
+        icon = new ImageIcon("Resources/ballguy.png").getImage();
+        PlayerIcon ball = new PlayerIcon(icon, 410, 20);
+        ball.drawYourself(gr,this);
+        icon = new ImageIcon("Resources/bugcatcher-gen4dp.png").getImage();
+        PlayerIcon bug = new PlayerIcon(icon, 410, 210);
+        bug.drawYourself(gr,this);
+        icon = new ImageIcon("Resources/depotagent.png").getImage();
+        PlayerIcon dep = new PlayerIcon(icon, 410, 410);
+        dep.drawYourself(gr,this);
+        icon = new ImageIcon("Resources/ethan-masters.png").getImage();
+        PlayerIcon ethan = new PlayerIcon(icon, 410, 600);
+        ethan.drawYourself(gr,this);
+        icon = new ImageIcon("Resources/gentleman.png").getImage();
+        PlayerIcon gent = new PlayerIcon(icon, 210, 600);
+        gent.drawYourself(gr,this);
+        icon = new ImageIcon("Resources/schoolkid-gen4dp.png").getImage();
+        PlayerIcon school = new PlayerIcon(icon, 10, 600);
+        school.drawYourself(gr,this);
     }
 }

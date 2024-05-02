@@ -23,7 +23,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     private boolean showdict;
     private boolean noEnergy;
     public Game() {
-        this.phase = 0;
+        this.phase = 4;
         s = new Scanner(System.in);
         lane = new Card[5][2];
         p1 = new Player();
@@ -55,6 +55,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     }
 
     public void run(){
+        this.madeDeck();
         this.startGame();
         window.repaint();
     }
@@ -98,6 +99,16 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
 
     //Make Starting Deck
     public void madeDeck(){
+        Turn.updateTurn(phase);
+        window.repaint();
+        madeDeckP1(p1);
+        madeDeckP2(p2);
+    }
+
+    public void madeDeckP1(Player p1){
+
+    }
+    public void madeDeckP2(Player p1){
 
     }
     //Make Cards for Deck
@@ -303,7 +314,12 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     public void mouseClicked(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
+        if(phase == 4){
 
+        }
+        if(phase == 5){
+
+        }
         if(Turn.isClicked(x,y)) {
             this.incrementPhase();
             if (phase == 0) {
@@ -317,6 +333,12 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
             }
             if(phase == 3){
                 phase3();
+            }
+            if(phase == 4){
+                phase4();
+            }
+            if(phase == 5){
+                phase5();
             }
         }
 
@@ -408,6 +430,12 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
         else if(phase == 2){
             phase = 0;
         }
+        else if(phase == 4){
+            phase = 5;
+        }
+        else if(phase == 5){
+            phase = 0;
+        }
         else{
             phase++;
         }
@@ -449,5 +477,13 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
 
     public boolean notEnergy(){
         return noEnergy;
+    }
+    public void phase4(){
+        Turn.updateTurn(phase);
+        window.repaint();
+    }
+    public void phase5(){
+        Turn.updateTurn(phase);
+        window.repaint();
     }
 }
