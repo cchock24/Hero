@@ -36,17 +36,19 @@ public class GameViewer extends JFrame {
         if(phase != 5 && phase != 4){
             this.Reset(gr);
             gr.setColor(Color.black);
+            g.getP1().drawIcon(gr,this,0);
+            g.getP2().drawIcon(gr,this,1);
             if(g.notEnergy()){
                 this.noEnergy(gr);
             }
             if (phase == 0) {
-                g.getP1().printHand(gr);
+                g.getP1().printHand(gr, this);
                 if(g.getshowdict()){
                     this.printDict(gr,g.getP1());
                 }
             }
             if (phase == 1) {
-                g.getP2().printHand(gr);
+                g.getP2().printHand(gr, this);
                 if(g.getshowdict()){
                     this.printDict(gr,g.getP2());
                 }
@@ -105,10 +107,10 @@ public class GameViewer extends JFrame {
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 5; j++) {
                 if (l[j][i] != null && i == 0) {
-                    l[j][i].drawLane(35 + (j * 120), 400, g);
+                    l[j][i].drawLane(35 + (j * 120), 400, g,this);
                 }
                 if (l[j][i] != null && i == 1) {
-                    l[j][i].drawLane(35 + (j * 120), 200, g);
+                    l[j][i].drawLane(35 + (j * 120), 200, g,this);
                 }
             }
         }
@@ -176,41 +178,10 @@ public class GameViewer extends JFrame {
         else{
             gr.drawString("P2 pick Character", 160, 100);
         }
-        Image icon = new ImageIcon("Resources/acetrainerf-gen6.png").getImage();
-        PlayerIcon atrainer1 = new PlayerIcon(icon, 10, 20);
-        atrainer1.drawYourself(gr, this);
-        icon = new ImageIcon("Resources/acetrainerf-gen6xy.png").getImage();
-        PlayerIcon atrainer2 = new PlayerIcon(icon, 10, 210);
-        atrainer2.drawYourself(gr,this);
-        icon = new ImageIcon("Resources/allister.png").getImage();
-        PlayerIcon allister = new PlayerIcon(icon, 10, 410);
-        allister.drawYourself(gr,this);
-        icon = new ImageIcon("Resources/anabel-gen7.png").getImage();
-        PlayerIcon anabel = new PlayerIcon(icon, 210, 20);
-        anabel.drawYourself(gr,this);
-        icon = new ImageIcon("Resources/aromalady.png").getImage();
-        PlayerIcon aroma = new PlayerIcon(icon, 210, 210);
-        aroma.drawYourself(gr,this);
-        icon = new ImageIcon("Resources/artist-gen4.png").getImage();
-        PlayerIcon artist = new PlayerIcon(icon, 210, 410);
-        artist.drawYourself(gr,this);
-        icon = new ImageIcon("Resources/ballguy.png").getImage();
-        PlayerIcon ball = new PlayerIcon(icon, 410, 20);
-        ball.drawYourself(gr,this);
-        icon = new ImageIcon("Resources/bugcatcher-gen4dp.png").getImage();
-        PlayerIcon bug = new PlayerIcon(icon, 410, 210);
-        bug.drawYourself(gr,this);
-        icon = new ImageIcon("Resources/depotagent.png").getImage();
-        PlayerIcon dep = new PlayerIcon(icon, 410, 410);
-        dep.drawYourself(gr,this);
-        icon = new ImageIcon("Resources/ethan-masters.png").getImage();
-        PlayerIcon ethan = new PlayerIcon(icon, 410, 600);
-        ethan.drawYourself(gr,this);
-        icon = new ImageIcon("Resources/gentleman.png").getImage();
-        PlayerIcon gent = new PlayerIcon(icon, 210, 600);
-        gent.drawYourself(gr,this);
-        icon = new ImageIcon("Resources/schoolkid-gen4dp.png").getImage();
-        PlayerIcon school = new PlayerIcon(icon, 10, 600);
-        school.drawYourself(gr,this);
+        for(int i = 0; i < 4; i++){
+            for(int j = 0 ; j < 3; j++){
+                g.getProfile()[i][j].drawYourself(gr,this);
+            }
+        }
     }
 }

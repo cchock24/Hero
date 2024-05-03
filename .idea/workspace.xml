@@ -5,35 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c1222c00-cdd5-4365-934b-70a8adf95699" name="Changes" comment=":|">
-      <change afterPath="$PROJECT_DIR$/Resources/A9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Aron.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Garbodor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Helioptile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Inteleon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Nidoking.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Porygon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Skarmory.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Snivy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Snorunt.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Volacrona.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/Weedle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/acetrainerf-gen6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/acetrainerf-gen6xy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/allister.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/anabel-gen7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/aromalady.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/artist-gen4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/ballguy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/bugcatcher-gen4dp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/depotagent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/ethan-masters.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/gentleman.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/schoolkid-gen4dp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PlayerIcon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resources/HeroCards.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameViewer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameViewer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PlayerIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayerIcon.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +149,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714496025278</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary=":|">
+      <option name="closed" value="true" />
+      <created>1714671718927</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1714671718927</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -193,18 +179,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GameViewer.java</url>
-          <line>130</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Game.java</url>
-          <line>346</line>
+          <line>422</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Game.java</url>
-          <line>382</line>
+          <line>460</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>

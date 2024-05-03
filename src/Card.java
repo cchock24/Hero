@@ -22,13 +22,18 @@ public class Card {
     private int x;
     private int y;
 
-    public Card(int h, int d, int e){
+    public Card(String i,int h, int d, int e, boolean de, boolean c, boolean f, boolean a, boolean s){
         health = h;
         damage = d;
         energy = e;
-        icon = new ImageIcon().getImage();
+        icon = new ImageIcon(i).getImage();
         origDamage = this.damage;
         frozen = false;
+        decay = de;
+        charge = c;
+        canFreeze = f;
+        hasArmor = a;
+        st = s;
     }
 
     public int getOrigDamage() {
@@ -129,20 +134,22 @@ public class Card {
         }
         return false;
     }
-    public void printCard(Graphics g){
+    public void printCard(Graphics g, GameViewer w){
         //Replace with Image Icon
         g.drawRect(x, y, CARD_WIDTH,CARD_HEIGHT);
+        g.drawImage(icon,x,y,CARD_WIDTH,CARD_HEIGHT, w);
         g.setFont(new Font("Serif", Font.PLAIN, 15));
         g.drawString("H: " + this.health, x+10, y + 15);
         g.drawString("E: " + this.energy, x+10, y + 30);
         g.drawString("D: " + this.damage, x+10, y + 45);
     }
     // Draw Icon for lane (default square for now)
-    public void drawLane(int x, int y, Graphics g){
+    public void drawLane(int x, int y, Graphics g, GameViewer w){
         this.x = x;
         this.y = y;
         //Replace with Image Icon
         g.drawRect(x, y, 30,30);
+        g.drawImage(icon,x,y,30,30,w);
         g.setFont(new Font("Serif", Font.PLAIN, 10));
         g.drawString("H: " + this.health, x+10, y+10);
         g.drawString("D: " + this.damage, x+10, y +20);

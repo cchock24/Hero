@@ -59,10 +59,10 @@ public class Player {
         this.block = block;
     }
 
-    public void printHand(Graphics g){
+    public void printHand(Graphics g, GameViewer w){
         for(int i = 0; i < hand.size(); i++){
             g.setFont(new Font("Serif", Font.PLAIN, 15));
-            hand.get(i).printCard(g);
+            hand.get(i).printCard(g, w);
         }
     }
     //Take random card from deck put it in hand if less than 10 cards
@@ -94,7 +94,7 @@ public class Player {
 
     public void randomDeck(){
         for(int i = 0; i < 40; i++){
-            deck.add(new Card(2,2,2));
+
         }
     }
 
@@ -111,5 +111,15 @@ public class Player {
 
     public void setIcon(Image icon) {
         this.icon = icon;
+    }
+    public void drawIcon(Graphics g, GameViewer w, int player){
+        if(player == 0){
+            g.drawOval(250,500,100,100);
+            g.drawImage(icon, 250, 500, 100, 100, w);
+        }
+        if(player == 1){
+            g.drawOval(250,50,100,100);
+            g.drawImage(icon, 250, 50, 100, 100, w);
+        }
     }
 }
