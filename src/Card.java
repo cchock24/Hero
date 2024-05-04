@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Card {
+    private String z;
     public boolean canStrike;
     public static final int CARD_WIDTH = 100;
     public static final int CARD_HEIGHT = 50;
@@ -26,7 +27,8 @@ public class Card {
         health = h;
         damage = d;
         energy = e;
-        icon = new ImageIcon(i).getImage();
+        icon = new ImageIcon("Resources/Sunflora.png").getImage();
+        // icon = new ImageIcon(i).getImage();
         origDamage = this.damage;
         frozen = false;
         decay = de;
@@ -137,7 +139,7 @@ public class Card {
     public void printCard(Graphics g, GameViewer w){
         //Replace with Image Icon
         g.drawRect(x, y, CARD_WIDTH,CARD_HEIGHT);
-        g.drawImage(icon,x,y,CARD_WIDTH,CARD_HEIGHT, w);
+        g.drawImage(icon,x + 45,y,50,CARD_HEIGHT, w);
         g.setFont(new Font("Serif", Font.PLAIN, 15));
         g.drawString("H: " + this.health, x+10, y + 15);
         g.drawString("E: " + this.energy, x+10, y + 30);
@@ -148,14 +150,8 @@ public class Card {
         this.x = x;
         this.y = y;
         //Replace with Image Icon
-        g.drawRect(x, y, 30,30);
-        g.drawImage(icon,x,y,30,30,w);
-        g.setFont(new Font("Serif", Font.PLAIN, 10));
-        g.drawString("H: " + this.health, x+10, y+10);
-        g.drawString("D: " + this.damage, x+10, y +20);
-    }
-    public void drawLane(Graphics g){
-        g.drawRect(x, y, 30,30);
+        g.drawRect(x, y, 70,30);
+        g.drawImage(icon,x+30,y,30,30,w);
         g.setFont(new Font("Serif", Font.PLAIN, 10));
         g.drawString("H: " + this.health, x+10, y+10);
         g.drawString("D: " + this.damage, x+10, y +20);
@@ -201,6 +197,11 @@ public class Card {
             g.drawString("Charger",x,y);
         }
 
+
     }
+    public void drawIcon(GameViewer w, Graphics g){
+        g.drawImage(icon,100,100,100,100, w);
+    }
+
 }
 

@@ -106,11 +106,12 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     public void startGame() {
         Turn.updateTurn(phase);
         window.repaint();
-        p1.randomDeck();
-        p2.randomDeck();
+        p1.randomDeck(cards);
+        p2.randomDeck(cards);
     }
 
     public void run() {
+        this.viewFile();
         this.pickProfile();
         this.madeDeck();
         this.startGame();
@@ -191,6 +192,8 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
         p1.addHand();
         p2.addHand();
         this.checkDecay();
+        this.p1Charge();
+        this.p2Charge();
     }
 
     public void addLane(Player p, int l, int index) {
@@ -230,7 +233,14 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
                     if (dead1) {
                         num1 = j;
                     }
-                } else {
+                    if(lane[j][0].isCanStrike()){
+                        win = p2.takeDamage(damage);
+                        if (win) {
+                            this.p1Win();
+                        }
+                    }
+                }
+                else {
                     win = p2.takeDamage(damage);
                     if (win) {
                         this.p1Win();
@@ -250,7 +260,14 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
                     if (dead2) {
                         num2 = j;
                     }
-                } else {
+                    if(lane[j][1].isCanStrike()){
+                        win = p1.takeDamage(damage);
+                        if (win) {
+                            this.p2Win();
+                        }
+                    }
+                }
+                else {
                     win = p1.takeDamage(damage);
                     if (win) {
                         this.p2Win();
@@ -561,12 +578,10 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     }
 
     //Taken and Edited from GeeksforGeeks
-    public static void viewFile() {
+    public void viewFile() {
 
         // Try block to check for exceptions
         try {
-            System.out.println("Customers are : ");
-
             // Creating object of File class to get file
             // path
             File myObj = new File("HeroCards.txt");
@@ -576,7 +591,6 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
             if (myObj.length() != 0) {
                 Scanner myReader = new Scanner(myObj);
                 myReader.useDelimiter(",");
-
                 while (myReader.hasNextLine()) {
                     String str = myReader.nextLine();
 
@@ -592,6 +606,21 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void p1Charge(){
+        for(Card c: p1.getHand()){
+            if(c.isCharge()){
+                p1.addEnergy(1);
+            }
+        }
+    }
+    public void p2Charge(){
+        for(Card c: p2.getHand()){
+            if(c.isCharge()){
+                p2.addEnergy(1);
+            }
         }
     }
 }

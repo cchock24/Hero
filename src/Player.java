@@ -72,13 +72,15 @@ public class Player {
             hand.add(deck.remove(random));
         }
         for(int i = 0; i < hand.size(); i++){
-            if(i <= 4){
+            if(i <= 3){
                 hand.get(i).setX(20 + (i * Card.CARD_WIDTH) + i*15);
                 hand.get(i).setY(630);
+                System.out.println(20 + (i * Card.CARD_WIDTH) + i*15);
             }
             else{
-                hand.get(i).setX(20 + ((i - 5) * Card.CARD_WIDTH) + (i-5)*15);
+                hand.get(i).setX(20 + ((i - 4) * Card.CARD_WIDTH) + (i-4)*15);
                 hand.get(i).setY(700);
+                System.out.println(20 + ((i - 4) * Card.CARD_WIDTH) + (i-4)*15);
             }
 
         }
@@ -92,9 +94,9 @@ public class Player {
         return hand.remove(index);
     }
 
-    public void randomDeck(){
+    public void randomDeck(ArrayList<Card> c){
         for(int i = 0; i < 40; i++){
-
+            deck.add(c.get((int) (Math.random() * 27)));
         }
     }
 
