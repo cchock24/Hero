@@ -27,7 +27,7 @@ public class Card {
         health = h;
         damage = d;
         energy = e;
-        icon = new ImageIcon("Resources/Sunflora.png").getImage();
+        icon = new ImageIcon(i).getImage();
         // icon = new ImageIcon(i).getImage();
         origDamage = this.damage;
         frozen = false;
