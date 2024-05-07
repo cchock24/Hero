@@ -32,6 +32,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     private Turn dict;
     private boolean showdict;
     private boolean noEnergy;
+    private boolean invalidSpot;
 
     public Game() {
         cards = new ArrayList<Card>();
@@ -53,6 +54,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
         dict.setString("Stats");
         showdict = false;
         noEnergy = false;
+        invalidSpot = false;
     }
 
     public static void main(String[] args) {
@@ -338,6 +340,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
             for (Card c : getP1().getHand()) {
                 if (c.isClicked(x, y) && energyCost(c, p1)) {
                     noEnergy = false;
+                    invalidSpot = false;
                     clickedCard = c;
                     origx = c.getX();
                     origy = c.getY();
@@ -365,7 +368,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
         // Check which player % 0 | Player 1
         if (clickedCard != null) {
             if (phase == 0) {
-                int num = this.validSpot(clickedCard.getX(), clickedCard.getY());
+                int num = this.validSpot(clickedCard.getX(), clickedCard.getY(), 0);
                 if (num != 5) {
                     lane[num][0] = clickedCard;
                     window.repaint();
@@ -375,19 +378,22 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
                     p1.addHand(clickedCard);
                     clickedCard.setY(origy);
                     clickedCard.setX(origx);
+                    window.repaint();
                 }
             }
             if (phase == 1) {
-                int num = this.validSpot(clickedCard.getX(), clickedCard.getY());
+                int num = this.validSpot(clickedCard.getX(), clickedCard.getY(), 1);
                 if (num != 5) {
                     lane[num][1] = clickedCard;
                     window.repaint();
                 }
                 if (num == 5) {
+                    invalidSpot = true;
                     p2.addEnergy(clickedCard.getEnergy());
                     p2.addHand(clickedCard);
                     clickedCard.setY(origy);
                     clickedCard.setX(origx);
+                    window.repaint();
                 }
             }
         }
@@ -485,29 +491,54 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
         //     window.repaint();
     }
 
-    public int validSpot(int x, int y) {
-        if (y < 475) {
+    public int validSpot(int x, int y, int p) {
+        if (y > 475) {
             return 5;
         }
-        if (x >= 0 && x <= 130) {
-            if (lane[0][0] == null) {
-                return 0;
+        if(p == 0){
+            if (x >= 0 && x <= 130) {
+                if (lane[0][0] == null) {
+                    return 0;
+                }
+            } else if (x >= 130 && x <= 240) {
+                if (lane[1][0] == null) {
+                    return 1;
+                }
+            } else if (x >= 240 && x <= 350) {
+                if (lane[2][0] == null) {
+                    return 2;
+                }
+            } else if (x >= 350 && x <= 480) {
+                if (lane[3][0] == null) {
+                    return 3;
+                }
+            } else if (x >= 480 && x <= 600) {
+                if (lane[4][0] == null) {
+                    return 4;
+                }
             }
-        } else if (x >= 130 && x <= 240) {
-            if (lane[1][0] == null) {
-                return 1;
-            }
-        } else if (x >= 240 && x <= 350) {
-            if (lane[2][0] == null) {
-                return 2;
-            }
-        } else if (x >= 350 && x <= 480) {
-            if (lane[3][0] == null) {
-                return 3;
-            }
-        } else if (x >= 480 && x <= 600) {
-            if (lane[4][0] == null) {
-                return 4;
+        }
+        if(p == 1){
+            if (x >= 0 && x <= 130) {
+                if (lane[0][1] == null) {
+                    return 0;
+                }
+            } else if (x >= 130 && x <= 240) {
+                if (lane[1][1] == null) {
+                    return 1;
+                }
+            } else if (x >= 240 && x <= 350) {
+                if (lane[2][1] == null) {
+                    return 2;
+                }
+            } else if (x >= 350 && x <= 480) {
+                if (lane[3][1] == null) {
+                    return 3;
+                }
+            } else if (x >= 480 && x <= 600) {
+                if (lane[4][1] == null) {
+                    return 4;
+                }
             }
         }
         return 5;
@@ -531,6 +562,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
 
     public void phase1() {
         Turn.updateTurn(phase);
+        invalidSpot = false;
         noEnergy = false;
         this.p2takeTurn();
         window.repaint();
@@ -538,6 +570,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
 
     public void phase2() {
         Turn.updateTurn(phase);
+        invalidSpot = false;
         noEnergy = false;
         this.Attack();
         for(int i = 0; i < 5; i++){
@@ -553,6 +586,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     public void phase0() {
         Turn();
         Turn.updateTurn(phase);
+        invalidSpot = false;
         noEnergy = false;
         this.p1takeTurn();
         window.repaint();
@@ -560,6 +594,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
 
     public void phase3() {
         Turn.updateTurn(phase);
+        invalidSpot = false;
         noEnergy = false;
         window.repaint();
     }
@@ -635,5 +670,8 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
                 p2.addEnergy(1);
             }
         }
+    }
+    public boolean notValidSpot(){
+        return invalidSpot;
     }
 }

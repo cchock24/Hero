@@ -41,6 +41,9 @@ public class GameViewer extends JFrame {
             if(g.notEnergy()){
                 this.noEnergy(gr);
             }
+            if(g.notValidSpot()){
+                this.invalidSpot(gr);
+            }
             if (phase == 0) {
                 gr.setColor(Color.white);
                 gr.fillRect(15,620,560,150);
@@ -173,6 +176,9 @@ public class GameViewer extends JFrame {
     }
     public void noEnergy(Graphics g){
         g.drawString("Not Enough Energy", 200,500);
+    }
+    public void invalidSpot(Graphics g){
+        g.drawString("Invalid Spot", 200,500);
     }
 
     public void startGame(Graphics gr, Player p){
