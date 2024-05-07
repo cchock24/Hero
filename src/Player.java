@@ -96,7 +96,9 @@ public class Player {
 
     public void randomDeck(ArrayList<Card> c){
         for(int i = 0; i < 40; i++){
-            deck.add(c.get((int) (Math.random() * 27)));
+            //Prevent Reference Interlap
+            Card card = new Card(c.get((int) (Math.random() * 27)));
+            deck.add(card);
         }
     }
 

@@ -42,12 +42,19 @@ public class GameViewer extends JFrame {
                 this.noEnergy(gr);
             }
             if (phase == 0) {
+                gr.setColor(Color.white);
+                gr.fillRect(15,620,560,150);
+                gr.setColor(Color.BLACK);
+                gr.drawLine(0,475,600,475);
                 g.getP1().printHand(gr, this);
                 if(g.getshowdict()){
                     this.printDict(gr,g.getP1());
                 }
             }
             if (phase == 1) {
+                gr.setColor(Color.white);
+                gr.fillRect(15,620,560,150);
+                gr.setColor(Color.BLACK);
                 g.getP2().printHand(gr, this);
                 if(g.getshowdict()){
                     this.printDict(gr,g.getP2());

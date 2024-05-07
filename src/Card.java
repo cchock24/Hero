@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class Card {
     private String z;
-    public boolean canStrike;
+    public boolean canStrike; //Strikethrough
     public static final int CARD_WIDTH = 100;
     public static final int CARD_HEIGHT = 50;
     private String name;
@@ -12,10 +12,10 @@ public class Card {
     private int energy;
     private boolean frozen;
     private boolean decay;
+    private boolean decaying;
     private boolean charge;
     private boolean canFreeze;
     private boolean hasArmor;
-    private boolean st; //Strikethrough
     Image icon;
     private int lane;
     private int playerNum;
@@ -35,7 +35,19 @@ public class Card {
         charge = c;
         canFreeze = f;
         hasArmor = a;
-        st = s;
+        canStrike = s;
+    }
+    public Card(Card c){
+        health = c.getHealth();
+        damage = c.getDamage();
+        energy = c.getEnergy();
+        this.icon = c.icon;
+        origDamage = c.getDamage();
+        frozen = false;
+        decay = c.isDecay();
+        charge = c.isCharge();
+        canFreeze = c.isCanFreeze();
+        canStrike = c.isCanStrike();
     }
 
     public int getOrigDamage() {
@@ -106,13 +118,6 @@ public class Card {
         this.charge = charge;
     }
 
-    public boolean isSt() {
-        return st;
-    }
-
-    public void setSt(boolean st) {
-        this.st = st;
-    }
 
     public int getLane() {
         return lane;
@@ -121,6 +126,14 @@ public class Card {
 
     public void setLane(int lane) {
         this.lane = lane;
+    }
+
+    public boolean isDecaying() {
+        return decaying;
+    }
+
+    public void setDecaying(boolean decaying) {
+        this.decaying = decaying;
     }
 
     public boolean takeDamage(int attack){
@@ -196,12 +209,19 @@ public class Card {
         if(charge){
             g.drawString("Charger",x,y);
         }
+        if(frozen){
+            g.drawString("Frozen",x,y);
+        }
+        if(decaying){
+            g.drawString("decaying",x,y);
+        }
 
 
     }
     public void drawIcon(GameViewer w, Graphics g){
         g.drawImage(icon,100,100,100,100, w);
     }
+
 
 }
 

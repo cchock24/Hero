@@ -229,6 +229,9 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
                         froze = true;
                         flane1 = j;
                     }
+                    if(lane[j][0].isDecay()){
+                        lane[j][1].setDecaying(true);
+                    }
                     dead1 = lane[j][1].takeDamage(damage);
                     if (dead1) {
                         num1 = j;
@@ -255,6 +258,9 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
                     if (lane[j][1].isCanFreeze()) {
                         froze2 = true;
                         flane2 = j;
+                    }
+                    if(lane[j][1].isDecay()){
+                        lane[j][0].setDecaying(true);
                     }
                     dead2 = lane[j][0].takeDamage(damage);
                     if (dead2) {
@@ -306,7 +312,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     public void checkDecay() {
         for (int i = 0; i < lane.length; i++) {
             for (int j = 0; j < lane[0].length; j++) {
-                if (lane[i][j] != null && lane[i][j].isDecay()) {
+                if (lane[i][j] != null && lane[i][j].isDecaying()) {
                     lane[i][j].takeDamage(1);
                 }
             }
@@ -480,7 +486,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     }
 
     public int validSpot(int x, int y) {
-        if (y > 475) {
+        if (y < 475) {
             return 5;
         }
         if (x >= 0 && x <= 130) {
@@ -534,6 +540,13 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
         Turn.updateTurn(phase);
         noEnergy = false;
         this.Attack();
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 2; j++){
+                if(lane[i][j].getHealth() == 0){
+                    lane[i][j] = null;
+                }
+            }
+        }
         window.repaint();
     }
 
