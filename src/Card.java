@@ -194,32 +194,36 @@ public class Card {
         this.y = y;
     }
     public void printStats(Graphics g){
+        int stagger = 0;
         if(decay){
-            g.drawString("Decay",x,y);
+            g.drawString("Decay",x,y + stagger);
+            stagger += 30;
         }
         if(hasArmor){
-            g.drawString("Armor",x,y);
+            g.drawString("Armor",x,y + stagger);
+            stagger += 30;
         }
         if(canStrike){
-            g.drawString("Strikethrough",x,y);
+            g.drawString("Strikethrough",x,y + stagger);
+            stagger += 30;
         }
         if(canFreeze){
-            g.drawString("Freeze",x,y);
+            g.drawString("Freeze",x,y + stagger);
+            stagger += 30;
         }
         if(charge){
-            g.drawString("Charger",x,y);
+            g.drawString("Charger",x,y + stagger);
+            stagger += 30;
         }
         if(frozen){
-            g.drawString("Frozen",x,y);
+            g.drawString("Frozen",x,y + stagger);
+            stagger += 30;
         }
         if(decaying){
-            g.drawString("decaying",x,y);
+            g.drawString("decaying",x,y + stagger);
         }
 
 
-    }
-    public void drawIcon(GameViewer w, Graphics g){
-        g.drawImage(icon,100,100,100,100, w);
     }
 
 

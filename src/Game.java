@@ -282,16 +282,16 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
                     }
                 }
             }
-            if (froze) {
-                lane[flane1][0].setFrozen(true);
+            if (froze && lane[flane1][1] != null) {
+                lane[flane1][1].setFrozen(true);
             }
-            if (froze2) {
-                lane[flane2][1].setFrozen(true);
+            if (froze2 && lane[flane2][0] != null) {
+                lane[flane2][0].setFrozen(true);
             }
-            if (dead1) {
+            if (dead1 && lane[num1][1] != null) {
                 lane[num1][1] = null;
             }
-            if (dead2) {
+            if (dead2 && lane[num2][0] != null) {
                 lane[num2][0] = null;
             }
         }
@@ -337,14 +337,18 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
             int x = e.getX();
             int y = e.getY();
             clickedCard = null;
-            for (Card c : getP1().getHand()) {
+            int count = p1.getHand().size();
+            for(int i = 0; i < count; i++){
+                Card c = p1.getHand().get(i);
                 if (c.isClicked(x, y) && energyCost(c, p1)) {
                     noEnergy = false;
                     invalidSpot = false;
                     clickedCard = c;
                     origx = c.getX();
                     origy = c.getY();
-                    getP1().getHand().remove(c);
+                    getP1().getHand().remove(i);
+                    count--;
+                    i--;
                 }
             }
         }
@@ -353,10 +357,18 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
             int x = e.getX();
             int y = e.getY();
             clickedCard = null;
-            for (Card c : getP2().getHand()) {
+            int count = p2.getHand().size();
+            for(int i = 0; i < count; i++){
+                Card c = p2.getHand().get(i);
                 if (c.isClicked(x, y) && energyCost(c, p2)) {
                     clickedCard = c;
-                    getP2().getHand().remove(c);
+                    noEnergy = false;
+                    invalidSpot = false;
+                    origx = c.getX();
+                    origy = c.getY();
+                    getP2().getHand().remove(i);
+                    count--;
+                    i--;
                 }
             }
         }
@@ -575,8 +587,10 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
         this.Attack();
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 2; j++){
-                if(lane[i][j].getHealth() == 0){
-                    lane[i][j] = null;
+                if(lane[i][j] != null){
+                    if(lane[i][j].getHealth() == 0){
+                        lane[i][j] = null;
+                    }
                 }
             }
         }

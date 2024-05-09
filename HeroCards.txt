@@ -25,3 +25,5 @@ Weedle,Resources/Weedle.png,1,1,1,TRUE,FALSE,FALSE,FALSE,FALSE
 Nidoking,Resources/Nidoking.png,6,5,5,TRUE,FALSE,FALSE,FALSE,FALSE
 Garbodor,Resources/Garbodor.png,6,6,6,TRUE,FALSE,FALSE,FALSE,FALSE
 Snivy,Resources/Snivy.png,1,3,1,FALSE,FALSE,FALSE,FALSE,FALSE
+Altaria,Resources/Altaria.png,3,6,4,FALSE,FALSE,FALSE,FALSE,FALSE
+Kyurem,Resources/Kyurem.png,6,6,6,FALSE,FALSE,TRUE,FALSE,FALSE
