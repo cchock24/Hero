@@ -158,14 +158,11 @@ public class GameViewer extends JFrame {
     }
 
     public void printDict(Graphics gr, Player p) {
-        for (Card c : g.getLane()[0]) {
-            if(c != null){
-                c.printStats(gr);
-            }
-        }
-        for (Card c : g.getLane()[1]) {
-            if(c != null) {
-                c.printStats(gr);
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 2; j++){
+                if(g.getLane()[i][j] != null){
+                    g.getLane()[i][j].printStats(gr);
+                }
             }
         }
         for (Card c : p.getHand()) {
