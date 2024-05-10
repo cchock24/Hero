@@ -24,6 +24,7 @@ public class GameViewer extends JFrame {
     }
 
     public void paint(Graphics gr) {
+        //Profile Pic Selection
         phase = g.getPhase();
         if(phase == 4){
             startGame(gr, g.getP1());
@@ -33,6 +34,7 @@ public class GameViewer extends JFrame {
             startGame(gr, g.getP2());
             g.getTurn().draw(gr);
         }
+        //Normal Game Phase
         if(phase != 5 && phase != 4){
             this.Reset(gr);
             gr.setColor(Color.black);
@@ -44,6 +46,7 @@ public class GameViewer extends JFrame {
             if(g.notValidSpot()){
                 this.invalidSpot(gr);
             }
+            //Print P1 Hand
             if (phase == 0) {
                 gr.setColor(Color.white);
                 gr.fillRect(15,620,560,150);
@@ -54,6 +57,7 @@ public class GameViewer extends JFrame {
                     this.printDict(gr,g.getP1());
                 }
             }
+            //Print P2 Hand
             if (phase == 1) {
                 gr.setColor(Color.white);
                 gr.fillRect(15,620,560,150);
@@ -67,7 +71,7 @@ public class GameViewer extends JFrame {
 
             }
             this.printLane(g.getLane(), gr);
-
+            //Print Win
             if (win1) {
                 this.printWin1(gr);
             }
@@ -89,17 +93,17 @@ public class GameViewer extends JFrame {
         gr.setFont(new Font("Serif", Font.PLAIN, 35));
         gr.drawString(Integer.toString(p.getHealth()), 410, 560);
     }
-
+    //Set opposite side energy
     public void setEnergyop(Graphics g, Player p) {
         g.setFont(new Font("Serif", Font.PLAIN, 30));
         g.drawString(Integer.toString(p.getEnergy()), 540, 110);
     }
-
+    //Set your energy
     public void setEnergyyou(Graphics g, Player p) {
         g.setFont(new Font("Serif", Font.PLAIN, 30));
         g.drawString(Integer.toString(p.getEnergy()), 50, 560);
     }
-
+    //Resets Screen, Then draws in Board and player stats
     public void Reset(Graphics gr) {
         gr.setColor(Color.white);
         gr.fillRect(0, 0, 600, 800);
@@ -112,7 +116,7 @@ public class GameViewer extends JFrame {
         g.getTurn().draw(gr);
         g.getdict().draw(gr);
     }
-
+    //Draw Cards in Lanes
     public void printLane(Card[][] l, Graphics g) {
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 5; j++) {
@@ -125,7 +129,7 @@ public class GameViewer extends JFrame {
             }
         }
     }
-
+    //Check win
     public void checkWin(int n) {
         if (n == 1) {
             win1 = true;
@@ -134,7 +138,7 @@ public class GameViewer extends JFrame {
             win2 = true;
         }
     }
-
+    //Draw P1 Win
     public void printWin1(Graphics gr) {
         gr.setColor(Color.white);
         gr.fillRect(0, 0, 600, 800);
@@ -142,7 +146,7 @@ public class GameViewer extends JFrame {
         gr.setFont(new Font("Serif", Font.PLAIN, 50));
         gr.drawString("Player 1 Wins!", 100, 300);
     }
-
+    //Draw P2 Win
     public void printWIN2(Graphics gr) {
         gr.setColor(Color.white);
         gr.fillRect(0, 0, 600, 800);
@@ -150,13 +154,13 @@ public class GameViewer extends JFrame {
         gr.setFont(new Font("Serif", Font.PLAIN, 50));
         gr.drawString("Player 2 Wins!", 100, 300);
     }
-
+    //Draw Buffer/Blank Image
     public void printBuf(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillRect(15, 620, 580, 780);
         g.setColor(Color.black);
     }
-
+    //Draw Stats
     public void printDict(Graphics gr, Player p) {
         for(int i = 0; i < 5; i++){
             for(int j = 0; j < 2; j++){
@@ -178,6 +182,7 @@ public class GameViewer extends JFrame {
         g.drawString("Invalid Spot", 200,500);
     }
 
+    //Draw Profile Picking stage
     public void startGame(Graphics gr, Player p){
         gr.setColor(Color.white);
         gr.fillRect(0, 0, 600, 800);

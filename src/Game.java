@@ -65,7 +65,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     public PlayerIcon[][] getProfile() {
         return profile;
     }
-
+// Initialize Profile Pictures
     public void pickProfile() {
         Image icon = new ImageIcon("Resources/acetrainerf-gen6.png").getImage();
         PlayerIcon atrainer1 = new PlayerIcon(icon, 10, 20);
@@ -133,7 +133,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
         System.out.println("Click the Turn Button to End Turn");
     }
 
-    // Subtract Energy
+    // Subtract Energy Cost
     public boolean energyCost(Card c, Player p) {
         int cost = p.getEnergy() - c.getEnergy();
         if (cost >= 0) {
@@ -174,10 +174,6 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
 
     }
 
-    //Make Cards for Deck
-    public void initCards() {
-
-    }
 
     public Player getP1() {
         return p1;
@@ -186,7 +182,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     public Player getP2() {
         return p2;
     }
-
+    //Runs all the code that needs to happen at beginning of Turn
     public void Turn() {
         turn++;
         p1.setEnergy(turn);
@@ -211,7 +207,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     public Card[][] getLane() {
         return lane;
     }
-
+//Simulate Attack Phase
     public void Attack() {
         boolean dead1 = false;
         boolean dead2 = false;
@@ -282,12 +278,14 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
                     }
                 }
             }
+            //Set Card to Frozen
             if (froze && lane[flane1][1] != null) {
                 lane[flane1][1].setFrozen(true);
             }
             if (froze2 && lane[flane2][0] != null) {
                 lane[flane2][0].setFrozen(true);
             }
+            //If Card has 0 HP kill it
             if (dead1 && lane[num1][1] != null) {
                 lane[num1][1] = null;
             }
@@ -296,7 +294,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
             }
         }
     }
-
+    //Check Win
     public void p2Win() {
         System.out.println("Player 2 Wins");
         window.checkWin(2);
@@ -320,7 +318,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
             }
         }
     }
-
+//Check if Card is Frozen
     public int checkFrozen(int l, int side, int damage) {
         if (lane[l][side].isFrozen()) {
             damage = 0;
@@ -377,7 +375,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // Check which player % 0 | Player 1
+        // Checks if Spot is Valid. If Yes places Card
         if (clickedCard != null) {
             if (phase == 0) {
                 int num = this.validSpot(clickedCard.getX(), clickedCard.getY(), 0);
@@ -413,6 +411,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     }
 
     @Override
+    //Drag and Move Card
     public void mouseClicked(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
@@ -434,6 +433,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
                 }
             }
         }
+        //If Turn is Clicked change phase
         if (Turn.isClicked(x, y)) {
             this.incrementPhase();
             if (phase == 0) {
@@ -502,7 +502,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     public void actionPerformed(ActionEvent e) {
         //     window.repaint();
     }
-
+    //Check if Valid Spot
     public int validSpot(int x, int y, int p) {
         if (y > 475) {
             return 5;
@@ -555,7 +555,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
         }
         return 5;
     }
-
+    //Changes the Phase in the right order
     public void incrementPhase() {
         if (phase == 0) {
             phase = 3;
@@ -571,7 +571,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
             phase++;
         }
     }
-
+//P2 Turn
     public void phase1() {
         Turn.updateTurn(phase);
         invalidSpot = false;
@@ -579,7 +579,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
         this.p2takeTurn();
         window.repaint();
     }
-
+//Attack Phase
     public void phase2() {
         Turn.updateTurn(phase);
         invalidSpot = false;
@@ -596,16 +596,25 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
         }
         window.repaint();
     }
-
+    //P1 Turn
     public void phase0() {
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 2; j++){
+                if(lane[i][j] != null && lane[i][j].checkDead()){
+                    lane[i][j] = null;
+                }
+            }
+        }
+        window.repaint();
         Turn();
         Turn.updateTurn(phase);
         invalidSpot = false;
         noEnergy = false;
         this.p1takeTurn();
         window.repaint();
-    }
 
+    }
+//Break Phase Hide Card from other Player
     public void phase3() {
         Turn.updateTurn(phase);
         invalidSpot = false;
@@ -628,7 +637,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     public boolean notEnergy() {
         return noEnergy;
     }
-
+//Pick Profile Pic Phase
     public void phase4() {
         Turn.updateTurn(phase);
         window.repaint();
@@ -640,6 +649,7 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
     }
 
     //Taken and Edited from GeeksforGeeks
+    //Take Stats from txt turn into cards
     public void viewFile() {
 
         // Try block to check for exceptions
@@ -670,17 +680,19 @@ public class Game implements MouseListener, MouseMotionListener, ActionListener 
             throw new RuntimeException(e);
         }
     }
-
+//Adds Charge if Charge card on field
     public void p1Charge(){
-        for(Card c: p1.getHand()){
-            if(c.isCharge()){
+        for(int i = 0; i < 5; i++){
+            Card c = lane[i][0];
+            if(c != null && c.isCharge()){
                 p1.addEnergy(1);
             }
         }
     }
     public void p2Charge(){
-        for(Card c: p2.getHand()){
-            if(c.isCharge()){
+        for(int i = 0; i < 5; i++){
+            Card c = lane[i][1];
+            if(c != null && c.isCharge()){
                 p2.addEnergy(1);
             }
         }

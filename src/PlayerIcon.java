@@ -20,6 +20,7 @@ public class PlayerIcon {
         return icon;
     }
 
+    //Check if clicked
     public boolean isClicked(int x, int y){
         if(x >= this.x && x <= this.x+iconWidth && y >= this.y && y <= this.y+iconLength){
             return true;
@@ -27,14 +28,7 @@ public class PlayerIcon {
         return false;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
+    //Draw itself
     public void drawYourself(Graphics gr, GameViewer w){
         gr.drawImage(icon, x, y, iconWidth, iconLength, w);
     }

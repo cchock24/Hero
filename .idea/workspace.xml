@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c1222c00-cdd5-4365-934b-70a8adf95699" name="Changes" comment=":|">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameViewer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameViewer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PlayerIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayerIcon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Turn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Turn.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +214,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715273075761</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary=":|">
+      <option name="closed" value="true" />
+      <created>1715274645576</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1715274645576</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -243,12 +255,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Game.java</url>
-          <line>645</line>
+          <line>655</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/Card.java</url>
-          <line>161</line>
+          <line>162</line>
           <properties class="Card" method="drawLane">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -257,7 +269,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/Card.java</url>
-          <line>151</line>
+          <line>152</line>
           <properties class="Card" method="printCard">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

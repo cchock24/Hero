@@ -135,7 +135,7 @@ public class Card {
     public void setDecaying(boolean decaying) {
         this.decaying = decaying;
     }
-
+    //Take Damage
     public boolean takeDamage(int attack){
         //Armor makes it so attacks to one less damage
         if(this.isHasArmor()){
@@ -149,6 +149,7 @@ public class Card {
         }
         return false;
     }
+    //Print Itself
     public void printCard(Graphics g, GameViewer w){
         //Replace with Image Icon
         g.drawRect(x, y, CARD_WIDTH,CARD_HEIGHT);
@@ -171,6 +172,7 @@ public class Card {
     }
 
     // Modified from Mr. Blick CS2FinalProjectResources
+    //Check if clicked
     public boolean isClicked(int x, int y) {
         if(x >= this.x && x <= this.x+CARD_WIDTH && y >= this.y && y <= this.y+CARD_HEIGHT){
             return true;
@@ -193,6 +195,7 @@ public class Card {
     public void setY(int y) {
         this.y = y;
     }
+    //Print Stats
     public void printStats(Graphics g){
         int stagger = 0;
         if(decay){
@@ -222,8 +225,13 @@ public class Card {
         if(decaying){
             g.drawString("decaying",x,y + stagger);
         }
-
-
+    }
+    //Checks if Card is Dead
+    public boolean checkDead(){
+        if(health == 0){
+            return true;
+        }
+        return false;
     }
 
 

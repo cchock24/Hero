@@ -11,7 +11,7 @@ public class Turn {
         this.y = y;
         this.radius = 30;
     }
-
+    //Updates Turn Image
     public void updateTurn(int phase){
         if(phase == 0){
             this.turn = "P1";
@@ -33,11 +33,13 @@ public class Turn {
         }
     }
     // Modified From Mr. Blick CS2FinalProjectResources
+    //Draws Itself
     public void draw(Graphics g) {
         g.drawOval(x - radius, y - radius, 2 * radius, 2 * radius);
         g.drawString(turn,x-15,y+5);
     }
     // Modified From Mr. Blick CS2FinalProjectResources
+    //Checks if clicked
     public boolean isClicked(int x, int y) {
         double dx = (this.x - x) * (this.x - x);
         double dy = (this.y - y) * (this.y - y);

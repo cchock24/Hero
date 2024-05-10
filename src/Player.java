@@ -59,6 +59,7 @@ public class Player {
         this.block = block;
     }
 
+    //Print Player's Hand
     public void printHand(Graphics g, GameViewer w){
         for(int i = 0; i < hand.size(); i++){
             g.setFont(new Font("Serif", Font.PLAIN, 15));
@@ -89,11 +90,12 @@ public class Player {
         hand.add(c);
     }
 
+    //Take Card from hand put in lane
     public Card addLane(int index){
         hand.get(index).setLane(index);
         return hand.remove(index);
     }
-
+    //Make Random Deck
     public void randomDeck(ArrayList<Card> c){
         for(int i = 0; i < 40; i++){
             //Prevent Reference Interlap
@@ -105,6 +107,7 @@ public class Player {
     public ArrayList<Card> getHand() {
         return hand;
     }
+    //Take Damage
     public boolean takeDamage(int damage){
         this.health -= damage;
         if(health <= 0){
@@ -116,6 +119,7 @@ public class Player {
     public void setIcon(Image icon) {
         this.icon = icon;
     }
+    //Draw Player Icon
     public void drawIcon(Graphics g, GameViewer w, int player){
         if(player == 0){
             g.drawOval(250,500,100,100);
